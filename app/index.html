@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compound Interest</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="base.css">
+<style>
+  form{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem;margin:.75rem 0}
+  form label{display:grid;gap:.3rem}
+  .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.5rem;margin:1rem 0}
+  .summary div{border:1px solid var(--line);border-radius:.6rem;padding:.6rem .8rem;background:var(--card)}
+  .summary b{display:block;font-size:1.4rem;font-variant-numeric:tabular-nums}
+  .summary span{color:var(--muted);font-size:.85rem}
+  .summary .main b{color:var(--accent)}
+  table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem}
+  td,th{padding:.35rem .5rem;border-bottom:1px solid var(--line);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted);font-weight:500}
+  .scroll{max-height:24rem;overflow:auto;border:1px solid var(--line);border-radius:.5rem}
+
+  .chart{display:flex;align-items:flex-end;gap:2px;height:12rem;border-bottom:1px solid var(--line);margin:1rem 0 .5rem}
+  .chart div{flex:1;display:flex;flex-direction:column-reverse;min-width:0}
+  .chart span{display:block}
+  .c-in{background:color-mix(in srgb,var(--accent) 45%,var(--card))}
+  .c-gr{background:var(--good)}
+  .legend{display:flex;gap:1rem;font-size:.85rem;color:var(--muted)}
+  .legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:.2rem;margin-right:.3rem;vertical-align:-1px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Compound Interest</h1>
+  <p class="sub">See how a starting amount and regular saving grow. Returns are compounded monthly.</p>
+  <form id="form">
+    <label>Starting amount<input id="start" inputmode="decimal" value="5000"></label>
+    <label>Added each month<input id="monthly" inputmode="decimal" value="200"></label>
+    <label>Yearly return (%)<input id="rate" inputmode="decimal" value="6"></label>
+    <label>Years<input id="years" inputmode="numeric" value="20"></label>
+  </form>
+  <div class="summary" aria-live="polite">
+    <div class="main"><b id="final">0</b><span>Final amount</span></div>
+    <div><b id="paidin">0</b><span>You put in</span></div>
+    <div><b id="growth">0</b><span>Growth</span></div>
+  </div>
+  <div class="chart" id="chart" aria-hidden="true"></div>
+  <div class="legend"><span><i class="c-in"></i>Put in</span><span><i class="c-gr"></i>Growth</span></div>
+  <h2 style="font-size:1rem">Year by year</h2>
+  <div class="scroll"><table><thead><tr><th>Year</th><th>Put in</th><th>Growth</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
